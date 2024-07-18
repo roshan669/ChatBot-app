@@ -1,11 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import CustomizedInput from "../components/shared/CustomizedInput";
 import { IoIosLogIn } from "react-icons/io";
-import { UseAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
 
 function Login() {
-  const auth=UseAuth();
+  const auth=useAuth();
   const handleSubmit=async (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     const formData=new FormData(e.currentTarget);
