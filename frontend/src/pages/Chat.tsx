@@ -115,8 +115,10 @@ const Chat = () => {
               fontWeight: 700,
             }}
           >
+            <div>
             {/* {auth?.user?.name[0]}
             {auth?.user?.name.split(" ")[1][0]} */}
+            </div>
           </Avatar>
           <Typography sx={{ mx: "auto", fontFamily: "work sans" }}>
             You are talking to a ChatBOT

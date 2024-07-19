@@ -18,7 +18,7 @@ type User = {
 };
 type UserAuth = {
   isLoggedIn: boolean;
-  user: User | null;
+  user: User |null;
   login: (email: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
