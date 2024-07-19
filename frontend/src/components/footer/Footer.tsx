@@ -23,7 +23,7 @@ const Footer = () => {
               Roshan (Cody)
             </Link>
           </span>
-          💘
+          
         </p>
       </div>
     </footer>
