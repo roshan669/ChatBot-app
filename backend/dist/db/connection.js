@@ -1,0 +1,21 @@
+import { connect, disconnect } from "mongoose";
+async function connectToDatabase() {
+    try {
+        await connect(process.env.MONGODB_URL);
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("Cannot Connect To MonogoDB");
+    }
+}
+async function disconnectfromDatabase() {
+    try {
+        await disconnect();
+    }
+    catch (error) {
+        console.log(error);
+        throw new Error("Could not Disconnect from MonogoDB");
+    }
+}
+export { connectToDatabase, disconnectfromDatabase };
+//# sourceMappingURL=connection.js.map
