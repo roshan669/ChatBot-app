@@ -6,13 +6,13 @@ import cors from "cors";
 config();
 const app = express();
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://chatbot-app-7s11.onrender.com",
     credentials: true
 }));
 // middlewares
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-// remove it in production
+
 app.use("/api/v1", appRouter);
 export default app;
 //# sourceMappingURL=app.js.map
