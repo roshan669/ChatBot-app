@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q index.js\" ",
+    "build": "tsc",
     "start": "node index.js"
   },
   "keywords": [],
