@@ -25,7 +25,7 @@ export const userSignup = async (req, res, next) => {
         // Highlighted changes start here
         res.clearCookie(COOKIE_NAME, {
             httpOnly: true, // Changed from false to true
-            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+            domain: ".onrender.com", // Removed "https://"
             signed: true,
             path: "/",
             secure: true, // Added secure attribute
@@ -35,7 +35,7 @@ export const userSignup = async (req, res, next) => {
         const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         res.cookie(COOKIE_NAME, token, {
             path: "/",
-            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+            domain: ".onrender.com", // Removed "https://"
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             httpOnly: true, // Changed from false to true
             signed: true,
@@ -66,9 +66,9 @@ export const userLogin = async (req, res, next) => {
         // Highlighted changes start here
         res.clearCookie(COOKIE_NAME, {
             httpOnly: true, // Changed from false to true
-            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+            domain: ".onrender.com", // Removed "https://"
             signed: true,
-            path: "/api/v1/user/login",
+            path: "/",
             secure: true, // Added secure attribute
             sameSite: "lax", // Added sameSite attribute
         });
@@ -76,8 +76,8 @@ export const userLogin = async (req, res, next) => {
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
-            path: "/api/v1/user/login",
-            domain: "chatbot-app-7s11.onrender.com",
+            path: "/",
+            domain: ".onrender.com",
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
             httpOnly: true, // Changed from false to true
             signed: true,
@@ -125,7 +125,7 @@ export const userLogout = async (req, res, next) => {
         }
         res.clearCookie(COOKIE_NAME, {
             httpOnly: true, // Changed from false to true
-            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+            domain: ".onrender.com", // Removed "https://"
             signed: true,
             path: "/",
             secure: true, // Added secure attribute
