@@ -35,7 +35,7 @@ export const userSignup = async (
 
     // create token and store cookie
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
+      httpOnly: false,
       domain: "https://chatbot-app-7s11.onrender.com",
       signed: true,
       path: "/",
@@ -48,7 +48,7 @@ export const userSignup = async (
       path: "/",
       domain: "https://chatbot-app-7s11.onrender.com",
       expires,
-      httpOnly: true,
+      httpOnly: false,
       signed: true,
     });
 
@@ -81,7 +81,7 @@ export const userLogin = async (
     // create token and store cookie
 
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
+      httpOnly: false,
       domain: "https://chatbot-app-7s11.onrender.com",
       signed: true,
       path: "/",
@@ -94,7 +94,7 @@ export const userLogin = async (
       path: "/",
       domain: "https://chatbot-app-7s11.onrender.com",
       expires,
-      httpOnly: true,
+      httpOnly: false,
       signed: true,
     });
 
@@ -146,7 +146,7 @@ export const userLogout = async (
     }
 
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: true,
+      httpOnly: false,
       domain: "https://chatbot-app-7s11.onrender.com",
       signed: true,
       path: "/",
