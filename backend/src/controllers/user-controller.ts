@@ -43,12 +43,11 @@ export const userSignup = async (
     });
 
     const token = createToken(user._id.toString(), user.email, "7d");
-    const expires = new Date();
-    expires.setDate(expires.getDate() + 7);
+    const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
       domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
-      expires,
+      expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
       secure: true, // Added secure attribute
@@ -97,7 +96,7 @@ export const userLogin = async (
     res.cookie(COOKIE_NAME, token, {
       path: "/",
       domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
-      expires,
+      expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
       secure: true, // Added secure attribute
