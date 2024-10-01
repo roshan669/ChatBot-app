@@ -15,7 +15,7 @@ export const getAllUsers = async (
     return res.status(200).json({ message: "OK", users });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
 };
 
@@ -35,7 +35,7 @@ export const userSignup = async (
     // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      // domain: ".onrender.com", // Removed "https://"
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
@@ -46,7 +46,7 @@ export const userSignup = async (
     const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      // domain: ".onrender.com", // Removed "https://"
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
@@ -83,7 +83,7 @@ export const userLogin = async (
     // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      domain: "https://chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
@@ -95,7 +95,7 @@ export const userLogin = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "https://chatbot-app-7s11.onrender.com", 
+      domain: "chatbot-app-7s11.onrender.com", 
       expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
@@ -109,7 +109,7 @@ export const userLogin = async (
       .json({ message: "OK", name: user.name, email: user.email });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
 };
 
@@ -133,7 +133,7 @@ export const verifyUser = async (
       .json({ message: "OK", name: user.name, email: user.email });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
 };
 
@@ -154,7 +154,7 @@ export const userLogout = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      // domain: ".onrender.com", // Removed "https://"
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
@@ -166,6 +166,6 @@ export const userLogout = async (
       .json({ message: "OK", name: user.name, email: user.email });
   } catch (error) {
     console.log(error);
-    return res.status(200).json({ message: "ERROR", cause: error.message });
+    return res.status(500).json({ message: "ERROR", cause: error.message });
   }
 };

@@ -11,7 +11,7 @@ config();
 const app=express();
 
 app.use(cors({
-    origin:"https://chatbot-app-7s11.onrender.com",
+    origin:"chatbot-app-7s11.onrender.com",
     credentials:true,
     methods: ['GET', 'POST']
 }))
