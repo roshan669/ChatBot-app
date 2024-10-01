@@ -25,7 +25,6 @@ export const userSignup = async (
   next: NextFunction
 ) => {
   try {
-    //user signup
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(401).send("User already registered");
@@ -33,12 +32,14 @@ export const userSignup = async (
     const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
-    // create token and store cookie
+    // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: false,
-      domain: "https://chatbot-app-7s11.onrender.com",
+      httpOnly: true, // Changed from false to true
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
+      secure: true, // Added secure attribute
+      sameSite: "lax", // Added sameSite attribute
     });
 
     const token = createToken(user._id.toString(), user.email, "7d");
@@ -46,11 +47,14 @@ export const userSignup = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "https://chatbot-app-7s11.onrender.com",
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       expires,
-      httpOnly: false,
+      httpOnly: true, // Changed from false to true
       signed: true,
+      secure: true, // Added secure attribute
+      sameSite: "lax", // Added sameSite attribute
     });
+    // Highlighted changes end here
 
     return res
       .status(201)
@@ -67,7 +71,6 @@ export const userLogin = async (
   next: NextFunction
 ) => {
   try {
-    //user login
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
@@ -78,13 +81,14 @@ export const userLogin = async (
       return res.status(403).send("Incorrect Password");
     }
 
-    // create token and store cookie
-
+    // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: false,
-      domain: "https://chatbot-app-7s11.onrender.com",
+      httpOnly: true, // Changed from false to true
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
+      secure: true, // Added secure attribute
+      sameSite: "lax", // Added sameSite attribute
     });
 
     const token = createToken(user._id.toString(), user.email, "7d");
@@ -92,11 +96,14 @@ export const userLogin = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "https://chatbot-app-7s11.onrender.com",
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       expires,
-      httpOnly: false,
+      httpOnly: true, // Changed from false to true
       signed: true,
+      secure: true, // Added secure attribute
+      sameSite: "lax", // Added sameSite attribute
     });
+    // Highlighted changes end here
 
     return res
       .status(200)
@@ -106,6 +113,7 @@ export const userLogin = async (
     return res.status(200).json({ message: "ERROR", cause: error.message });
   }
 };
+
 
 export const verifyUser = async (
   req: Request,
@@ -146,12 +154,14 @@ export const userLogout = async (
     }
 
     res.clearCookie(COOKIE_NAME, {
-      httpOnly: false,
-      domain: "https://chatbot-app-7s11.onrender.com",
+      httpOnly: true, // Changed from false to true
+      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
       path: "/",
+      secure: true, // Added secure attribute
+      sameSite: "lax", // Added sameSite attribute
     });
-
+    
     return res
       .status(200)
       .json({ message: "OK", name: user.name, email: user.email });
