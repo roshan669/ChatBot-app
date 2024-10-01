@@ -10,12 +10,11 @@ export const getAllUsers = async (req, res, next) => {
     }
     catch (error) {
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 };
 export const userSignup = async (req, res, next) => {
     try {
-        //user signup
         const { name, email, password } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser)
@@ -23,23 +22,27 @@ export const userSignup = async (req, res, next) => {
         const hashedPassword = await hash(password, 10);
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
-        // create token and store cookie
+        // Highlighted changes start here
         res.clearCookie(COOKIE_NAME, {
-            httpOnly: true,
-            domain: "https://chatbot-app-7s11.onrender.com",
+            httpOnly: true, // Changed from false to true
+            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
             signed: true,
             path: "/",
+            secure: true, // Added secure attribute
+            sameSite: "lax", // Added sameSite attribute
         });
         const token = createToken(user._id.toString(), user.email, "7d");
-        const expires = new Date();
-        expires.setDate(expires.getDate() + 7);
+        const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         res.cookie(COOKIE_NAME, token, {
             path: "/",
-            domain: "https://chatbot-app-7s11.onrender.com",
-            expires,
-            httpOnly: true,
+            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            httpOnly: true, // Changed from false to true
             signed: true,
+            secure: true, // Added secure attribute
+            sameSite: "lax", // Added sameSite attribute
         });
+        // Highlighted changes end here
         return res
             .status(201)
             .json({ message: "OK", name: user.name, email: user.email });
@@ -51,7 +54,6 @@ export const userSignup = async (req, res, next) => {
 };
 export const userLogin = async (req, res, next) => {
     try {
-        //user login
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
@@ -61,30 +63,35 @@ export const userLogin = async (req, res, next) => {
         if (!isPasswordCorrect) {
             return res.status(403).send("Incorrect Password");
         }
-        // create token and store cookie
+        // Highlighted changes start here
         res.clearCookie(COOKIE_NAME, {
-            httpOnly: true,
-            domain: "https://chatbot-app-7s11.onrender.com",
+            httpOnly: true, // Changed from false to true
+            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
             signed: true,
-            path: "/",
+            path: "/api/v1/user/login",
+            secure: true, // Added secure attribute
+            sameSite: "lax", // Added sameSite attribute
         });
         const token = createToken(user._id.toString(), user.email, "7d");
         const expires = new Date();
         expires.setDate(expires.getDate() + 7);
         res.cookie(COOKIE_NAME, token, {
-            path: "/",
-            domain: "https://chatbot-app-7s11.onrender.com",
-            expires,
-            httpOnly: true,
+            path: "/api/v1/user/login",
+            domain: "chatbot-app-7s11.onrender.com",
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            httpOnly: true, // Changed from false to true
             signed: true,
+            secure: true, // Added secure attribute
+            sameSite: "lax", // Added sameSite attribute
         });
+        // Highlighted changes end here
         return res
             .status(200)
             .json({ message: "OK", name: user.name, email: user.email });
     }
     catch (error) {
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 };
 export const verifyUser = async (req, res, next) => {
@@ -103,7 +110,7 @@ export const verifyUser = async (req, res, next) => {
     }
     catch (error) {
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 };
 export const userLogout = async (req, res, next) => {
@@ -117,10 +124,12 @@ export const userLogout = async (req, res, next) => {
             return res.status(401).send("Permissions didn't match");
         }
         res.clearCookie(COOKIE_NAME, {
-            httpOnly: true,
-            domain: "https://chatbot-app-7s11.onrender.com",
+            httpOnly: true, // Changed from false to true
+            domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
             signed: true,
             path: "/",
+            secure: true, // Added secure attribute
+            sameSite: "lax", // Added sameSite attribute
         });
         return res
             .status(200)
@@ -128,7 +137,7 @@ export const userLogout = async (req, res, next) => {
     }
     catch (error) {
         console.log(error);
-        return res.status(200).json({ message: "ERROR", cause: error.message });
+        return res.status(500).json({ message: "ERROR", cause: error.message });
     }
 };
 //# sourceMappingURL=user-controller.js.map
