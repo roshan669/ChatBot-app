@@ -85,7 +85,7 @@ export const userLogin = async (
       httpOnly: true, // Changed from false to true
       domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
       signed: true,
-      path: "/",
+      path: "/api/v1/user/login",
       secure: true, // Added secure attribute
       sameSite: "lax", // Added sameSite attribute
     });
@@ -94,7 +94,7 @@ export const userLogin = async (
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
-      path: "/",
+      path: "/api/v1/user/login",
       domain: "chatbot-app-7s11.onrender.com", 
       expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
