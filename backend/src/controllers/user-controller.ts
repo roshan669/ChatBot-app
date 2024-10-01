@@ -35,7 +35,7 @@ export const userSignup = async (
     // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: ".onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
@@ -46,7 +46,7 @@ export const userSignup = async (
     const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: ".onrender.com", // Removed "https://"
       expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
@@ -83,7 +83,7 @@ export const userLogin = async (
     // Highlighted changes start here
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: ".onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
@@ -95,7 +95,7 @@ export const userLogin = async (
     expires.setDate(expires.getDate() + 7);
     res.cookie(COOKIE_NAME, token, {
       path: "/",
-      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: ".onrender.com", // Removed "https://"
       expires:new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       httpOnly: true, // Changed from false to true
       signed: true,
@@ -154,7 +154,7 @@ export const userLogout = async (
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true, // Changed from false to true
-      domain: "chatbot-app-7s11.onrender.com", // Removed "https://"
+      domain: ".onrender.com", // Removed "https://"
       signed: true,
       path: "/",
       secure: true, // Added secure attribute
